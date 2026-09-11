@@ -29,7 +29,7 @@ MSA 기반으로 설계한 프로젝트·태스크·마일스톤·멤버 관리 
 <sub>Gateway · FE</sub>
 </td>
 <td align="center" width="150">
-<a href="https://github.com/jaena9958-art"><img src="https://github.com/jaena9958-art.png" width="90" height="90" style="border-radius:50%"><br><b>전재나</b></a><br>
+<a href="https://github.com/JAENA216"><img src="https://github.com/JAENA216.png" width="90" height="90" style="border-radius:50%"><br><b>전재나</b></a><br>
 <sub>Task API</sub>
 </td>
 </tr>
