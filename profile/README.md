@@ -12,6 +12,25 @@ MSA 기반으로 설계한 프로젝트·태스크·마일스톤·멤버 관리 
 
 ---
 
+## ✨ 주요 기능
+
+- **프로젝트 관리** — 프로젝트 생성 · 수정 · 소프트 삭제, `ACTIVE`/`DORMANT`/`TERMINATED` 상태 관리
+- **태스크 관리** — 태스크 CRUD, 태그 다중 연결, 마일스톤 연결(태스크 당 1개)
+- **마일스톤** — `PLANNED → IN_PROGRESS → COMPLETED / CANCELLED` 진척도 관리
+- **댓글 · 마이페이지** — 태스크별 댓글 CRUD, 내가 작성한 태스크/댓글 모아보기
+- **멤버 관리** — `ADMIN`/`MEMBER` 권한 기반 초대 · 권한 변경 · 제거
+- **인증 · 보안** — Redis 세션, 로그인 3회 실패 시 IP 블랙리스트(1분), CSRF·세션 고정 공격 방어
+
+## 🗂 ERD
+
+<div align="center">
+
+![ERD](https://raw.githubusercontent.com/AIOT3-miniDooray-team11/miniDooray-FE/main/submit/miniDooray-team11-ERD.png)
+
+</div>
+
+---
+
 ## 🧩 서비스 구성
 
 Gateway를 단일 진입점으로 하여 계정 관리와 태스크 관리를 별도 서비스로 분리한 MSA 구조입니다.
@@ -35,6 +54,15 @@ FE (8080) ── Spring MVC + Thymeleaf, Redis 세션
 | 👤 Account API | 계정 등록 · 조회 · 수정 · 삭제 | [miniDooray-AccountAPI](https://github.com/AIOT3-miniDooray-team11/miniDooray-AccountAPI) |
 | ✅ Task API | 프로젝트 · 태스크 · 마일스톤 · 멤버 · 댓글 관리 | [miniDooray-TaskAPI](https://github.com/AIOT3-miniDooray-team11/miniDooray-TaskAPI) |
 | 🖥️ FE | Thymeleaf 기반 웹 화면, 인증/세션 처리 | [miniDooray-FE](https://github.com/AIOT3-miniDooray-team11/miniDooray-FE) |
+
+## 📄 문서
+
+| 문서 | 링크 |
+|---|---|
+| Account API 명세 | [API_SPEC.md](https://github.com/AIOT3-miniDooray-team11/miniDooray-AccountAPI/blob/main/API_SPEC.md) |
+| Task API 명세 | [API_SPEC.md](https://github.com/AIOT3-miniDooray-team11/miniDooray-TaskAPI/blob/main/submit/API_SPEC.md) |
+| FE ↔ Backend 통신 명세 | [API_DOCS.md](https://github.com/AIOT3-miniDooray-team11/miniDooray-FE/blob/main/submit/API_DOCS.md) |
+| DDL | [Account](https://github.com/AIOT3-miniDooray-team11/miniDooray-AccountAPI/blob/main/DDL.sql) · [Task](https://github.com/AIOT3-miniDooray-team11/miniDooray-TaskAPI/blob/main/submit/DDL.sql) |
 
 ## 🛠 기술 스택
 
