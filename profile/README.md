@@ -14,22 +14,26 @@ MSA 기반으로 설계한 프로젝트·태스크·마일스톤·멤버 관리 
 
 ## 👥 Team 11
 
-<table>
+<table width="100%">
 <tr>
-<td align="center" width="150">
-<a href="https://github.com/hetgwi01"><img src="https://github.com/hetgwi01.png" width="90" height="90" style="border-radius:50%"><br><b>김동건</b></a><br>
-<sub>Account API · Task API<br>(마일스톤 · 멤버)</sub>
+<td align="center" width="25%">
+<a href="https://github.com/hetgwi01"><img src="https://github.com/hetgwi01.png" width="90" height="90" style="border-radius:50%"></a><br><br>
+<a href="https://github.com/hetgwi01"><b>김동건</b></a><br>
+<sub>Account API · Task API<br>(마일스톤·멤버)</sub>
 </td>
-<td align="center" width="150">
-<a href="https://github.com/SRIOUSS"><img src="https://github.com/SRIOUSS.png" width="90" height="90" style="border-radius:50%"><br><b>조창희</b></a><br>
+<td align="center" width="25%">
+<a href="https://github.com/SRIOUSS"><img src="https://github.com/SRIOUSS.png" width="90" height="90" style="border-radius:50%"></a><br><br>
+<a href="https://github.com/SRIOUSS"><b>조창희</b></a><br>
 <sub>Gateway · FE</sub>
 </td>
-<td align="center" width="150">
-<a href="https://github.com/woalshue"><img src="https://github.com/woalshue.png" width="90" height="90" style="border-radius:50%"><br><b>손재민</b></a><br>
+<td align="center" width="25%">
+<a href="https://github.com/woalshue"><img src="https://github.com/woalshue.png" width="90" height="90" style="border-radius:50%"></a><br><br>
+<a href="https://github.com/woalshue"><b>손재민</b></a><br>
 <sub>Gateway · FE</sub>
 </td>
-<td align="center" width="150">
-<a href="https://github.com/JAENA216"><img src="https://github.com/JAENA216.png" width="90" height="90" style="border-radius:50%"><br><b>전재나</b></a><br>
+<td align="center" width="25%">
+<a href="https://github.com/JAENA216"><img src="https://github.com/JAENA216.png" width="90" height="90" style="border-radius:50%"></a><br><br>
+<a href="https://github.com/JAENA216"><b>전재나</b></a><br>
 <sub>Task API</sub>
 </td>
 </tr>
