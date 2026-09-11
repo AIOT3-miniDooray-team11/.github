@@ -37,12 +37,12 @@ MSA 기반으로 설계한 프로젝트·태스크·마일스톤·멤버 관리 
 flowchart TB
     Client["🖥️ Client (Browser)"]
 
-    subgraph Gateway["Gateway :8000"]
-        GW["라우팅 · 글로벌 로깅"]
+    subgraph FE["FE :8080"]
+        FES["Spring MVC + Thymeleaf<br/>화면 렌더링 · 로그인 · 세션"]
     end
 
-    subgraph FE["FE :8080"]
-        FES["Spring MVC + Thymeleaf<br/>로그인 · 세션"]
+    subgraph Gateway["Gateway :8000"]
+        GW["/account-api/** , /task-api/**<br/>라우팅 · 글로벌 로깅"]
     end
 
     subgraph AccountAPI["Account API :8081"]
@@ -57,21 +57,21 @@ flowchart TB
     AccountDB[("MySQL / H2<br/>Account DB")]
     TaskDB[("MySQL / H2<br/>Task DB")]
 
-    Client --> GW
-    GW --> FES
+    Client -- "페이지 요청" --> FES
+    FES -. 세션 .-> Redis
+    FES -- "RestClient<br/>(/account-api, /task-api)" --> GW
     GW --> ACS
     GW --> TKS
-    FES -. 세션 .-> Redis
     TKS -- "RestClient 내부 호출<br/>(계정 정보 조회)" --> ACS
     ACS --> AccountDB
     TKS --> TaskDB
 ```
 
-Gateway가 단일 진입점 역할을 하며 FE·Account API·Task API로 요청을 라우팅합니다. FE는 Redis에 세션을 저장하고, Task API는 멤버 목록 등 계정 정보가 필요할 때 Account API를 내부 REST 호출로 조회합니다. 서비스별로 데이터베이스를 분리해 독립적으로 배포·확장할 수 있도록 구성했습니다.
+Client(브라우저)는 FE에 직접 접속해 화면을 렌더링받습니다. FE는 서버사이드에서 백엔드 데이터가 필요할 때만 Gateway를 거쳐 Account API·Task API를 호출하며, Gateway는 `/account-api`, `/task-api` 경로만 라우팅합니다. Task API는 멤버 목록 등 계정 정보가 필요할 때 Account API를 내부 REST 호출로 조회합니다. 서비스별로 데이터베이스를 분리해 독립적으로 배포·확장할 수 있도록 구성했습니다.
 
 ## 🧩 서비스 구성
 
-Gateway를 단일 진입점으로 하여 계정 관리와 태스크 관리를 별도 서비스로 분리한 MSA 구조입니다.
+Client는 FE에 직접 접속하고, FE가 필요할 때만 Gateway를 거쳐 백엔드(Account API·Task API)를 호출하는 구조입니다.
 
 | 서비스 | 설명 | Repository |
 |---|---|---|
