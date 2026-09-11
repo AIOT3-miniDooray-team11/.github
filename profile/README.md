@@ -31,22 +31,47 @@ MSA 기반으로 설계한 프로젝트·태스크·마일스톤·멤버 관리 
 
 ---
 
+## 🏗 시스템 아키텍처
+
+```mermaid
+flowchart TB
+    Client["🖥️ Client (Browser)"]
+
+    subgraph Gateway["Gateway :8000"]
+        GW["라우팅 · 글로벌 로깅"]
+    end
+
+    subgraph FE["FE :8080"]
+        FES["Spring MVC + Thymeleaf<br/>로그인 · 세션"]
+    end
+
+    subgraph AccountAPI["Account API :8081"]
+        ACS["계정 등록 · 조회 · 수정 · 삭제<br/>BCrypt 비밀번호 암호화"]
+    end
+
+    subgraph TaskAPI["Task API :8082"]
+        TKS["프로젝트 · 태스크 · 마일스톤<br/>멤버 · 댓글"]
+    end
+
+    Redis[("Redis<br/>세션 저장소")]
+    AccountDB[("MySQL / H2<br/>Account DB")]
+    TaskDB[("MySQL / H2<br/>Task DB")]
+
+    Client --> GW
+    GW --> FES
+    GW --> ACS
+    GW --> TKS
+    FES -. 세션 .-> Redis
+    TKS -- "RestClient 내부 호출<br/>(계정 정보 조회)" --> ACS
+    ACS --> AccountDB
+    TKS --> TaskDB
+```
+
+Gateway가 단일 진입점 역할을 하며 FE·Account API·Task API로 요청을 라우팅합니다. FE는 Redis에 세션을 저장하고, Task API는 멤버 목록 등 계정 정보가 필요할 때 Account API를 내부 REST 호출로 조회합니다. 서비스별로 데이터베이스를 분리해 독립적으로 배포·확장할 수 있도록 구성했습니다.
+
 ## 🧩 서비스 구성
 
 Gateway를 단일 진입점으로 하여 계정 관리와 태스크 관리를 별도 서비스로 분리한 MSA 구조입니다.
-
-```
-Client
-  │
-  ▼
-Gateway (8000)  ── 라우팅 · 글로벌 로깅
-  ├── Account API (8081) ── 계정 관리
-  └── Task API    (8082) ── 프로젝트 · 태스크 · 마일스톤 · 멤버 · 댓글
-        │
-        └── (내부 호출) Account API
-
-FE (8080) ── Spring MVC + Thymeleaf, Redis 세션
-```
 
 | 서비스 | 설명 | Repository |
 |---|---|---|
